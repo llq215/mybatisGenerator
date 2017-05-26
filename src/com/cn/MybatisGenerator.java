@@ -55,9 +55,9 @@ public class MybatisGenerator {
      * 数据库配置
      */
     private final String driverName = "com.mysql.jdbc.Driver";
-    private final String url = "jdbc:mysql://127.0.0.1:3306/qiuba";
+    private final String url = "jdbc:mysql://127.0.0.1:3306/test";
     private final String user = "root";
-    private final String password = "liu6687215";
+    private final String password = "123456";
  
     private String tableName = null;
     private String beanName = null;
