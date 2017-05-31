@@ -37,6 +37,7 @@ public class MybatisGenerator {
     private final String type_int = "INT";
     private final String type_text = "TEXT";
  
+    private final String dbName = "qiuba";  //所在的数据库
     private final String moduleName = "t_pay_order_record"; // 表名称（所有请留空，指定表名只生成单表mapper等）
     private final String bean_package = "com.qiuba.pay.model"; //所属包路径
     private final String mapper_package = "com.qiuba.pay.dao"; //dao路径
@@ -81,7 +82,7 @@ public class MybatisGenerator {
         List<String> tables = new ArrayList<String>();
         PreparedStatement pstate = null;
         if(StringUtils.isNotBlank(moduleName)){
-            pstate = conn.prepareStatement("select table_name from information_schema.tables where table_name ='"+moduleName+"'");
+        	pstate = conn.prepareStatement("select table_name from information_schema.tables where table_name ='"+moduleName+"' and table_schema = '"+dbName+"'");
         }else{
             pstate = conn.prepareStatement("select table_name from information_schema.tables");
         }
@@ -736,7 +737,7 @@ public class MybatisGenerator {
             columns = new ArrayList<String>();
             types = new ArrayList<String>();
             comments = new ArrayList<String>();
-            pstate = conn.prepareStatement(prefix +"'"+ table +"'");
+            pstate = conn.prepareStatement(prefix +"'"+ table +"' and table_schema = '"+dbName+"'");
             ResultSet results = pstate.executeQuery();
             while ( results.next() ) {
                 columns.add(results.getString("column_name"));
